@@ -19,9 +19,9 @@ class Altimeter extends Actor with ActorLogging {
 
   val maxRateOfClimb = 5000
 
-  var rateOfClimb = Of
+  var rateOfClimb = 0f
 
-  var altitude = Od
+  var altitude = 0d
 
   //need to know how much time has passed
   var lastTick = System.currentTimeMillis
@@ -31,8 +31,18 @@ class Altimeter extends Actor with ActorLogging {
   case object Tick
 
   def receive = {
-    
+
+    case RateChange(amount) => 
+      rateOfClimb = amount.min(1.0f).max(-1.0f) * maxRateOfClimb
+      log.info(s"Altimeter changed rate of climb to $rateOfClimb.")
+
+    case Tick =>
+      val tick = System.currentTimeMillis
+      altitude = altitude + ((tick - lastTick) / 60000.0) * rateOfClimb
+      lastTick = tick
   }
+
+  override def postStop(): Unit = ticker.cancel
 
 
 }

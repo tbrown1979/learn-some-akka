@@ -38,6 +38,6 @@ class Wood extends Actor {
 
 class PrintingActor extends Actor {
   def receive = {
-    case msg => println msg
+    case msg => println(msg)
   }
 }

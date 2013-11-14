@@ -16,8 +16,8 @@ class MyActor extends Actor {
   }
 }
 
-val system = ActorSystem("MyActors")
+// val system = ActorSystem("MyActors")
 
-val actorProps = Props[MyActor]
+// val actorProps = Props[MyActor]
 
-val actor = system.actorOf(actorProps)
+// val actor = system.actorOf(actorProps)
