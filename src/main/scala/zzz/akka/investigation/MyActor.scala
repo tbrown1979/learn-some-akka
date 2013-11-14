@@ -1,6 +1,6 @@
 package zzz.akka.investigation
 
-import akka.actor.Actor
+import akka.actor.{Props, Actor, ActorSystem}
 
 case class Gamma(g: String)
 case class Beta(b: String, g: Gamma)
@@ -16,3 +16,8 @@ class MyActor extends Actor {
   }
 }
 
+val system = ActorSystem("MyActors")
+
+val actorProps = Props[MyActor]
+
+val actor = system.actorOf(actorProps)
