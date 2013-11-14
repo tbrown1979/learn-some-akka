@@ -29,3 +29,15 @@ object BadShakespeareanMain {
     system.shutdown()
   }
 }
+
+class Wood extends Actor {
+  def receive = {
+    case _ => throw new Exception("Wood can't hear you.")
+  }
+}
+
+class PrintingActor extends Actor {
+  def receive = {
+    case msg => println msg
+  }
+}
